@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class Lista {
     ArrayList<String> lista = new ArrayList<String>();
@@ -30,6 +33,7 @@ public class Lista {
                     remover(valorListaRemover);
                     break;
                 case 3:
+                    converter();
                     break;
                 case 4:
                     mostrarLista();
@@ -53,7 +57,17 @@ public class Lista {
         System.out.println("Item removido!");
     }
 
-    /* Metodo converter o que foi escrito para um arquivo .txt */
+    public void converter(){
+        try (FileWriter fw = new FileWriter("TO-DO.txt");
+             PrintWriter pw = new PrintWriter(fw)) {
+
+            pw.println(lista);
+            System.out.println("Arquivo salvo com sucesso!");
+
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
+        }
+    }
 
     public void mostrarLista(){
         for(int i = 0; i < lista.size(); i++){
