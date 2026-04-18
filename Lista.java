@@ -12,6 +12,7 @@ public class Lista {
         int opcao = 0;
         
         do{
+            System.out.println();
             System.out.println("*** To Do List ***");
             System.out.println("1 - Adicionar item");
             System.out.println("2 - Remover item");
@@ -20,16 +21,17 @@ public class Lista {
             System.out.println("5 - Sair");
             System.out.print("Digite uma opção: ");
             opcao = entrada.nextInt();
+            entrada.nextLine();
 
             switch (opcao){
                 case 1:
                     System.out.print("O que deseja adicionar: ");
-                    String valorLista = entrada.next();
+                    String valorLista = entrada.nextLine();
                     adicionar(valorLista);
                     break;
                 case 2:
                     System.out.print("O que deseja remover: ");
-                    String valorListaRemover = entrada.next();
+                    String valorListaRemover = entrada.nextLine();
                     remover(valorListaRemover);
                     break;
                 case 3:
@@ -61,8 +63,11 @@ public class Lista {
         try (FileWriter fw = new FileWriter("TO-DO.txt");
              PrintWriter pw = new PrintWriter(fw)) {
 
-            pw.println(lista);
-            System.out.println("Arquivo salvo com sucesso!");
+            for(int i = 0; i < lista.size(); i++){
+            pw.println("- " + lista.get(i));
+            }
+
+            System.out.print("Arquivo salvo com sucesso!\n");
 
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
@@ -70,6 +75,7 @@ public class Lista {
     }
 
     public void mostrarLista(){
+        System.out.println();
         for(int i = 0; i < lista.size(); i++){
             System.out.println("- " + lista.get(i));
         }
